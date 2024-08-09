@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv  = require('dotenv');
 
+const authRoutes = require('./routes/authRoutes')
+
 dotenv.config()
 
 
@@ -30,20 +32,6 @@ mongoose.connect(process.env.dbURL )
 console.log('Error connecting to databse',error) )
 
 
-// mongoose.connect(url)
-// .then((response) =>{
-
-//     app.listen(PORT);
-//     console.log(`Server is running on port ${PORT}`);
-//     console.log("DB connected successfully")
-
-// }
-    
-// )
-// .catch((error) => 
-// console.log('Error connecting to databse',error) )
-
-
 //routes
 app.get('/', (req, res) =>{
     res.render('home')
@@ -55,3 +43,5 @@ app.get('/', (req, res) =>{
 app.get('/memories', (req, res) =>{
     res.render('memories');
 })
+
+app.use(authRoutes)
