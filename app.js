@@ -1,0 +1,57 @@
+const express = require('express');
+const mongoose = require('mongoose');
+const dotenv  = require('dotenv');
+
+dotenv.config()
+
+
+const app = express();
+
+// middleware
+app.use(express.static('public'));
+
+
+//view engine
+app.set('view', 'ejs');
+
+// database connection
+
+mongoose.connect(process.env.dbURL )
+.then((response) =>{
+
+    app.listen(3000);
+    console.log('Server is running on port  3000');
+    console.log("DB connected successfully")
+
+}
+    
+)
+.catch((error) => 
+console.log('Error connecting to databse',error) )
+
+
+// mongoose.connect(url)
+// .then((response) =>{
+
+//     app.listen(PORT);
+//     console.log(`Server is running on port ${PORT}`);
+//     console.log("DB connected successfully")
+
+// }
+    
+// )
+// .catch((error) => 
+// console.log('Error connecting to databse',error) )
+
+
+//routes
+app.get('/', (req, res) =>{
+    res.render('home')
+
+}
+    
+);
+
+app.get('/memories', (req, res) =>{
+    res.render('memories');
+})
