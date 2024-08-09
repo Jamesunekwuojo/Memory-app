@@ -12,7 +12,7 @@ app.use(express.static('public'));
 
 
 //view engine
-app.set('view', 'ejs');
+app.set('view engine', 'ejs');
 
 // database connection
 
