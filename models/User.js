@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const {isEmail} = require('validator');
-
+const bcrypt = require('bcrypt')
 
 const  userschema = new mongoose.Schema({
     email:{
@@ -22,23 +22,17 @@ const  userschema = new mongoose.Schema({
 })
 
 
-// Fire function after user has being savd to DB, using mongoose hook
 
-userschema.post('save', function (doc, next) {
 
-    console.log("New user was created", doc);
-;
+//fire function before the document is being save, using bcrypt to hash the password nd adding a 'salt' to the plane password text before it is being hashed
+userschema.pre('save', async function(next) {
 
-    next()  //To get to the next middleware
+  const salt = await bcrypt.genSalt();
+  this.password = await bcrypt.hash(this.password, salt)
 
-} ); //Note the first argument in the 'post()' method is the event, and the second one is the function that I want it to fire
 
-//fire function before
-userschema.pre('save', function(next) {
 
-    console.log("Before user is saved", this)
-
-    next()
+    next();
 
 });
 
