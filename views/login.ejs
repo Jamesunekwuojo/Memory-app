@@ -1,6 +1,6 @@
 <%- include('partials/header'); -%>
 
-<form action="/signup">
+<form action="/login">
   <h2>Login</h2>
   <label for="email">Email</label>
   <input type="text" name="email"  />
@@ -10,6 +10,22 @@
   <div class="password error"></div>
   <button>login</button>
 </form>
+
+script>
+  const form = document.querySelector('form');
+  
+  form.addEventListener('submit', (e)=>{
+    e.preventDefault(); //prevents page from refreshing
+
+    //get values
+    const email = form.email.value;
+    const password = form.password.value;
+
+    console.log(email, password)
+  })
+
+</script>
+
 
 <%- include('partials/footer'); -%>
 
