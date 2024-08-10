@@ -46,3 +46,14 @@ app.get('/memories', (req, res) =>{
 })
 
 app.use(authRoutes)
+
+// Cookies
+app.get('/set-cookies', (req, res)=>{
+    res.setHeader('Set-cookie', 'newUser=true');
+    res.send('You got the Cookies ')
+})
+
+
+app.get('/read-cookies', (res, req)=>{
+  
+})
