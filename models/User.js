@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const {isEmail} = require('validator');
 const bcrypt = require('bcrypt')
 
-const  userschema = new mongoose.Schema({
+const  userSchema = new mongoose.Schema({
     email:{
         type:String,
         required:[true, 'Please enter an email'], //second part is custom error message
@@ -25,7 +25,7 @@ const  userschema = new mongoose.Schema({
 
 
 //fire function before the document is being save, using bcrypt to hash the password nd adding a 'salt' to the plane password text before it is being hashed
-userschema.pre('save', async function(next) {
+userSchema.pre('save', async function(next) {
 
   const salt = await bcrypt.genSalt();
   this.password = await bcrypt.hash(this.password, salt)
@@ -36,6 +36,24 @@ userschema.pre('save', async function(next) {
 
 });
 
-const User = mongoose.model('user', userschema);
+// creating Static method to login user
+userSchema.statics.login = async function(email, password) {
+    const user = await this.findOne({email});
+
+    if(user){
+
+        //compare passwords
+        const auth = bcrypt.compare(password, user.password)
+
+        if(auth){
+            return user;
+        }
+        throw Error('incorrect password');
+
+    }
+    throw Error('Incorrect email')
+}
+
+const User = mongoose.model('user', userSchema);
 
 module.exports = User;
