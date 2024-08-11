@@ -34,7 +34,8 @@ module.exports.loginGet =(req, res) => {
 
 module.exports.signupPost = async(req, res) => {
     
-    const {email, password} = req.body
+    const {email, password} = req.body;
+    console.log('Email nd password received by server')
 
     try{ 
 

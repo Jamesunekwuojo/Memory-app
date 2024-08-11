@@ -49,21 +49,23 @@ app.get('/memories', (req, res) =>{
 
 app.use(authRoutes)
 
-// Cookies
-app.get('/set-cookies', (req, res)=>{
+// Cookies examples
+//app.get('/set-cookies', (req, res)=>{
     // res.setHeader('Set-cookie', 'newUser=true');
-    res.cookie('newUser', false,);
-    res.cookie('isEmployer', true, {maxAge: 1000 * 60 *60 *24, httpOnly:true}) 
-    res.send('You got the Cookies ')
-})
+    //res.cookie('newUser', false,);
+    // res.cookie('isEmployer', true, {maxAge: 1000 * 60 *60 *24, httpOnly:true}) 
+    //res.send('You got the Cookies ')
+//})
 
 
-app.get('/read-cookies', (req, res)=>{
+// app.get('/read-cookies', (req, res)=>{
 
-    const cookies = req.cookies;
+//     const cookies = req.cookies;
 
-    console.log(cookies); 
-    res.json(cookies)
+//     console.log(cookies); 
+//     res.json(cookies)
 
   
-})
+// })
+
+// Note: To every request made by the browser to the server,  cookies are being sent to the server
