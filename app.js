@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv  = require('dotenv');
+const cookieParser = require('cookie-parser');
 
 const authRoutes = require('./routes/authRoutes')
 
@@ -12,6 +13,7 @@ const app = express();
 // middleware
 app.use(express.json());
 app.use(express.static('public'));
+app.use(cookieParser());
 
 
 //view engine
@@ -49,11 +51,19 @@ app.use(authRoutes)
 
 // Cookies
 app.get('/set-cookies', (req, res)=>{
-    res.setHeader('Set-cookie', 'newUser=true');
+    // res.setHeader('Set-cookie', 'newUser=true');
+    res.cookie('newUser', false,);
+    res.cookie('isEmployer', true, {maxAge: 1000 * 60 *60 *24, httpOnly:true}) 
     res.send('You got the Cookies ')
 })
 
 
-app.get('/read-cookies', (res, req)=>{
+app.get('/read-cookies', (req, res)=>{
+
+    const cookies = req.cookies;
+
+    console.log(cookies); 
+    res.json(cookies)
+
   
 })
