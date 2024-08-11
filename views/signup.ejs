@@ -13,9 +13,15 @@
  
 <script>
   const form = document.querySelector('form');
+  const emailError = document.querySelector('.email.error');
+
+  const passwordError = document.querySelector('.password.error');
   
   form.addEventListener('submit', async(e)=>{
     e.preventDefault(); //prevents page from refreshing
+
+    emailError.textContent = '';
+    passwordError.textContent = '';
 
     //get values
     const email = form.email.value;
@@ -25,11 +31,24 @@
 
     try {
 
-      const result = await fetch('/signup',{
+      const res = await fetch('/signup',{
         method:"POST",
         body:JSON.stringify({email, password}),
         headers:{'Content-Type': "application/json"}
       });
+
+      const data = await res.json();
+      console.log(data);
+
+      if(data.errors){
+        emailError.textContent = data.errors.email;
+        passwordError.textContent = data.errors.password;
+      }
+
+      if (data.user){
+        location.assign('/');
+      }
+
       
 
     } 
