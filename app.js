@@ -4,6 +4,7 @@ const dotenv  = require('dotenv');
 const cookieParser = require('cookie-parser');
 
 const authRoutes = require('./routes/authRoutes')
+const {requireAuth} = require('./middleware/authMiddleware.js')
 
 dotenv.config()
 
@@ -36,16 +37,16 @@ console.log('Error connecting to databse',error) )
 
 
 //routes
-app.get('/', (req, res) =>{
+app.get('/', requireAuth,  (req, res) =>
     res.render('home')
 
-}
+
     
 );
 
-app.get('/memories', (req, res) =>{
-    res.render('memories');
-})
+app.get('/memories', requireAuth,   (req, res) =>
+    res.render('memories')
+)
 
 app.use(authRoutes)
 
