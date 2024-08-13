@@ -13,10 +13,12 @@ const handleErrors =(err)=>{
     // for login post
     if(err.message === 'incorrect email'){
         errors.email = 'That email is not registered';
+        
     }
 
     if(err.message === 'incorrect password'){
         errors.password = 'That password is incorrect';
+    
     }
 
     // Errors Handler for signup post
