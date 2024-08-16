@@ -46,6 +46,7 @@ const handleErrors =(err)=>{
 
 const maxAge = 3 * 24 * 60 * 60;
 const jwtSecret = process.env.SECRET_KEY;
+
 //create jwt tokens
 const createToken = (id) =>{
     return jwt.sign({id}, jwtSecret, {expiresIn: maxAge}) // expects time in seconds

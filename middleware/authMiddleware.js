@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
-dotenv.config()
+dotenv.config();
+const User = require('../models/User.js') 
 
 const requireAuth = (req, res, next) => {
     const token = req.cookies.jwt;
@@ -34,7 +35,7 @@ const checkUser =async (req, res, next) =>{
 
         jwt.verify(token, jwtSecret, async(err, decodedToken) => {
             if (err) {
-                console.log(err.message);user = null
+                console.log(err.message);
                 res.locals.user = null
                 
             } else {
