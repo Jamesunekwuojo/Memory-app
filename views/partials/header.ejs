@@ -9,9 +9,15 @@
   <nav>
     <h1><a href="/">uDEV HistoryHub</a></h1>
     <ul>
-      <li> <a href="/logout">LOGOUT</a> </li>
-      <li> <a href="/login">LOGIN</a> </li>
-      <li> <a href="/signup" class="btn">SIGN UP</a> </li>
+      <% if (user) {%>
+        <li>Welcome <%= user.email %></li>
+        <li> <a href="/logout">LOGOUT</a> </li>
+      <% } else { %>
+        <li> <a href="/login">LOGIN</a> </li>
+        <li> <a href="/signup" class="btn">SIGN UP</a> </li>
+      <% } %>
+     
+      
     </ul></>
   </nav>
   

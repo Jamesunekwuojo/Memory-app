@@ -3,10 +3,13 @@ const dotenv = require('dotenv');
 dotenv.config();
 const User = require('../models/User.js') 
 
+
+const jwtSecret = process.env.SECRET_KEY;
+
 const requireAuth = (req, res, next) => {
     const token = req.cookies.jwt;
 
-    const jwtSecret = process.env.SECRET_KEY;
+   
 
     // check if token exists and is verified
     if(token) {
