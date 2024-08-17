@@ -123,10 +123,11 @@ header .btn{
 .recipe{
   display: inline-block;
   border-radius: 20px;
-  background: white;
+  background: #F7B81F;
   position: relative;
   text-align: center;
-  padding: 0 20px 30px 20px
+  padding: 0 20px 30px 20px;
+  
 }
 .recipe img{
   width: 100px;
