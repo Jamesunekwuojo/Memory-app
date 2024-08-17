@@ -23,7 +23,7 @@ app.set('view engine', 'ejs');
 
 // database connection
 
-mongoose.connect(process.env.dbURL )
+mongoose.connect(process.env.DBURL )
 .then((response) =>{
 
     app.listen(3000);
